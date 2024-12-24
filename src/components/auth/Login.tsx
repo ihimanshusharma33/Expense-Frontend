@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
     return (
@@ -29,20 +30,21 @@ const Login: React.FC = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-                    <button
-                        type="submit"
-                        className="w-1/3 bg-dark-accent text-dark-text px-4 py-2 rounded-md hover:bg-dark-text hover:text-dark-primary"
-                    >
-                        Login
-                    </button>
+                        <button
+                            type="submit"
+                            className="w-1/3 bg-dark-accent text-dark-primary px-4 py-2 rounded-md hover:bg-dark-text hover:text-dark-primary"
+                        >
+                            Login
+                        </button>
                     </div>
                 </form>
-                <p className="text-sm text-center text-gray-600 mt-4">
+                <p className="text-sm text-center text-dark-text mt-4">
                     Don't have an account?{" "}
-                    <a href="#" className="text-blue-600 hover:underline">
+                    <Link to="/Register" className="text-dark-accent hover:underline">
                         Register
-                    </a>
+                    </Link>
                 </p>
+
             </div>
         </div>
     );

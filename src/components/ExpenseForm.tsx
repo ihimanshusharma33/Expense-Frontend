@@ -113,7 +113,7 @@ export default function ExpenseForm() {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-dark-accent text-dark-text px-4 py-2 rounded-md hover:bg-dark-text hover:text-dark-primary"
+          className="bg-dark-accent  text-dark-primary px-4 py-2 rounded-md hover:bg-dark-text hover:text-dark-primary"
         >
           Add Expense
         </button>
