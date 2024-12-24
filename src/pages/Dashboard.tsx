@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { PieChart, DollarSign, Users, TrendingUp } from 'lucide-react';
 import { StatCard } from '../components/common/StatCard';
 import { Card, CardHeader, CardContent } from '../components/common/Card';

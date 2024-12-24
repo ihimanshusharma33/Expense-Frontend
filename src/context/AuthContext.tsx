@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { User } from '../types';
+import { User } from '../types/index.ts';
 
 interface AuthContextType {
   user: User | null;
@@ -14,12 +14,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const login = (email: string, password: string) => {
-    // Mock login - replace with real authentication
-    setUser({
-      id: '1',
-      name: 'John Doe',
-      email: email,
-    });
+    setUser(
+  {    
+    "id": "1",
+      "name": 'John Doe',
+      "email": email,
+      "avatar": 'https://i.pravatar.cc/150?img=68'
+      });
   };
 
   const logout = () => {
@@ -29,9 +30,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = (name: string, email: string, password: string) => {
     // Mock registration - replace with real authentication
     setUser({
-      id: '1',
-      name: name,
-      email: email,
+     "id": "1",
+      "name": name,
+      "email": email,
+      "avatar": 'https://i.pravatar.cc/150?img=68'
     });
   };
 

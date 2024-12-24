@@ -2,6 +2,9 @@ import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ExpenseForm from './components/ExpenseForm';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 function App() {
   return (
     <div className="dark">
@@ -15,7 +18,7 @@ function App() {
             </AuthProvider>
           } />
           <Route path='/expenses' element={<AuthProvider>
-            <Layout children={<h1>Hello Expense </h1>}>
+            <Layout children={<ExpenseForm/>}>
             </Layout>
           </AuthProvider>
           } />
@@ -26,6 +29,9 @@ function App() {
               </Layout>
             </AuthProvider>}
           />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register/>} />
+          <Route path='*' element={<h1>Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </div>

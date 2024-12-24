@@ -39,3 +39,21 @@ export interface Budget {
   period: string; // YYYY-MM
   recommendations?: string[];
 }
+export interface Expense {
+  id: string;
+  title: string;
+  amount: number;
+  date: string;
+  category: string;
+  splitWith: {
+    userId: string;
+    amount: number;
+    settled: boolean;
+  }[];
+}
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+}

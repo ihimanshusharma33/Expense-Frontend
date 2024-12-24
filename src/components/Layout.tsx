@@ -6,13 +6,10 @@ import { Link } from 'react-router-dom';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const [MobileMenu, setMobileMenu] = React.useState(false);
-  const [addExpense, setAddExpense] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('Dashboard');
 
   const handleAddExpense = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Expense added!");
-    setAddExpense(false);
   };
 
   return (
@@ -30,14 +27,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Home className="h-4 w-4 mr-1" />
                   Dashboard
                 </Link>
-                <button
-                  className={`inline-flex items-center px-1 pt-1  hover:text-dark-text ${activeTab === 'Add Expense' ? 'text-dark-accent border-b-2 border-dark-accent' : ''}`}
-                  onClick={() => { setAddExpense(!addExpense), setActiveTab('Add Expense') }}
+                <Link to='/expenses'
+                  className={`inline-flex items-center px-1 pt-1  ${activeTab === 'Add Expense' ? 'text-dark-accent border-b-2 border-dark-accent' : ''}`}
+                  onClick={() => { setActiveTab('Add Expense') }}
                 >
                   <Plus className="h-4 w-4 mr-1" />
                   Add Expense
-                </button>
-                <Link to="/splits" className={`inline-flex items-center px-1 pt-1  hover:text-dark-text ${activeTab === 'split' ? 'text-dark-accent border-b-2 border-dark-accent' : ''}`}
+                </Link>
+                <Link to="/splits" className={`inline-flex items-center px-1 pt-1  ${activeTab === 'split' ? 'text-dark-accent border-b-2 border-dark-accent' : ''}`}
                   onClick={() => setActiveTab('split')}>
                   <Users className="h-4 w-4 mr-1" />
                   Split History
@@ -84,8 +81,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {MobileMenu && (
           <div className="flex flex-col">
             <div className="mt-2 ml-4">
+            
               <Link
-                to="/dashboard"
+                to="/"
                 className="text-lg inline-flex items-center px-1 pt-1 text-dark-accent border-b-2 border-dark-accent"
               >
                 <Home className="h-4 w-4 mr-1" />
@@ -93,13 +91,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <div className="mt-2 ml-4">
-              <button
+              <Link
+                to="/expenses"
                 className="text-lg inline-flex items-center px-1 pt-1 text-dark-muted hover:text-dark-text"
-                onClick={() => setAddExpense(!addExpense)}
               >
                 <Plus className="h-4 w-4 mr-1" />
                 Add Expense
-              </button>
+              </Link>
+              <Link
+                to="/budgetplans"
+                className="text-lg inline-flex items-center px-1 pt-1 text-dark-accent border-b-2 border-dark-accent"
+              >
+                <Home className="h-4 w-4 mr-1" />
+                SmartBudgetPlanner
+              </Link>
             </div>
             <div className="mt-2 ml-4">
               <Link
@@ -113,79 +118,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         )}
       </nav>
-      {addExpense && (
-        <div className={`h-fit fixed inset-0 z-10 top-12 bg-dark-secondary p-6 rounded-md shadow-md max-w-md mx-auto 
-          mt-6 transform transition-transform duration-300 ease-in-out ${addExpense ? "scale-100 opacity-100" : "scale-90 opacity-0"
-          }`}>
-          <button className='absolute top-2 right-2' onClick={() => setAddExpense(!addExpense)}>
-            <svg
-              xmlns="http://www.w3.org/
-              2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-dark-accent"  >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <h2 className="text-lg font-bold text-dark-accent mb-4">Add Expense</h2>
-          <form onSubmit={handleAddExpense}>
-            <div className="mb-4">
-              <label htmlFor="expenseName" className="block text-sm font-medium text-dark-text">
-                Expense Name
-              </label>
-              <input
-                type="text"
-                id="expenseName"
-                className="mt-1 block w-full rounded-md border border-dark-border bg-dark-primary text-dark-text px-3 py-2"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="amount" className="block text-sm font-medium text-dark-text">
-                Amount
-              </label>
-              <input
-                type="number"
-                id="amount"
-                className="mt-1 block w-full rounded-md border border-dark-border bg-dark-primary text-dark-text px-3 py-2"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="category" className="block text-sm font-medium text-dark-text">
-                Category
-              </label>
-              <select
-                id="category"
-                className="mt-1 block w-full rounded-md border border-dark-border bg-dark-primary text-dark-text px-3 py-2"
-                required
-              >
-                <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Utilities">Utilities</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="date" className="block text-sm font-medium text-dark-text">
-                Date
-              </label>
-              <input
-                type="date"
-                id="date"
-                className="mt-1 block w-full rounded-md border border-dark-border bg-dark-primary text-dark-text px-3 py-2"
-                required
-              />
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="bg-dark-accent text-dark-text px-4 py-2 rounded-md hover:bg-dark-text hover:text-dark-primary"
-              >
-                Add Expense
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+    
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
     </div>
   );
